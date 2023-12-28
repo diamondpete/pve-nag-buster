@@ -1,6 +1,6 @@
 #!/bin/sh
 
-_VERS="v04"
+_VERS="v05"
 _BRANCH=$(git rev-parse --abbrev-ref HEAD) >/dev/null 2>&1  ||
   { echo "can't poll branch, defaulting to master" && _BRANCH="master"; }
 

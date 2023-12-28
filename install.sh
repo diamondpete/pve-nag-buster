@@ -2,7 +2,7 @@
 # shellcheck disable=SC2064
 set -eu
 
-# pve-nag-buster (v04) https://github.com/foundObjects/pve-nag-buster
+# pve-nag-buster (v05) https://github.com/foundObjects/pve-nag-buster
 # Copyright (C) 2019 /u/seaQueue (reddit.com/u/seaQueue)
 #
 # Removes Proxmox VE 6.x+ license nags automatically after updates
@@ -86,6 +86,7 @@ _install() {
 	#
 
 	deb http://download.proxmox.com/debian/pve $RELEASE pve-no-subscription
+	deb http://download.proxmox.com/debian/ceph-quincy $RELEASE no-subscription
 	EOF
 
   # create dpkg pre/post install hooks for persistence
@@ -115,7 +116,7 @@ _install() {
     tempd="$(mktemp -d)" &&
       trap "echo 'Cleaning up temporary files ...'; rm -f $tempd/*; rmdir $tempd" EXIT
     temp="$tempd/pve-nag-buster.sh"
-    wget https://raw.githubusercontent.com/foundObjects/pve-nag-buster/master/pve-nag-buster.sh \
+    wget https://raw.githubusercontent.com/diamondpete/pve-nag-buster/master/pve-nag-buster.sh \
       -q --show-progress -O "$temp"
   fi
   echo "Installing hook script as /usr/share/pve-nag-buster.sh"
@@ -136,7 +137,7 @@ _install() {
 # Important: if you're not me you should probably decode this and read it to make sure I'm not doing
 #            something malicious like mining dogecoin or stealing your valuable cat pictures
 
-# pve-nag-buster.sh (v04) encoded below:
+# pve-nag-buster.sh (v05) encoded below:
 
 emit_script() {
   base64 -d << 'YEET' | unxz

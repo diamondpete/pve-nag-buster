@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# pve-nag-buster.sh (v04) https://github.com/foundObjects/pve-nag-buster
+# pve-nag-buster.sh (v05) https://github.com/foundObjects/pve-nag-buster
 # Copyright (C) 2019 /u/seaQueue (reddit.com/u/seaQueue)
 #
 # Removes Proxmox VE 6.x+ license nags automatically after updates
