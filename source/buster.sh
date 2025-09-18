@@ -38,7 +38,9 @@ CEPH_BASE="/etc/apt/sources.list.d/ceph"
 
 CEPH_URI="http:\/\/download.proxmox.com\/debian\/ceph-squid"
 
-if [ -f "$ENTERPRISE_BASE.sources" ]; then
+ENTERPRISE_LAST_LINE=$(tail -n 1 "$ENTERPRISE_BASE.sources")
+
+if [ "$ENTERPRISE_LAST_LINE" != "Enabled: false" ]; then
   echo "$SCRIPT: Disabling PVE enterprise repo sources..."
   echo "Enabled: false" >> $ENTERPRISE_BASE.sources
 fi
