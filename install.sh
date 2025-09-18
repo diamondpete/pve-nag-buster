@@ -86,16 +86,16 @@ _install() {
   fi
 
   # create the pve-no-subscription source
-  echo "Creating PVE no-subscription repo source ..."
-  emit_proxmox_source > "$path_apt_sources_proxmox"
+  echo "Creating Proxmox pve-no-subscription repo source ..."
+  emit_proxmox_sources > "$path_apt_sources_proxmox"
 
   # create the ceph no-subscription source
   echo "Creating Ceph no-subscription repo source ..."
-  emit_ceph_source > "$path_apt_sources_ceph"
+  emit_ceph_sources > "$path_apt_sources_ceph"
 
   # create the debian source
   echo "Creating Debian repo source ..."
-  emit_debian_source > "$path_apt_sources_debian"
+  emit_debian_sources > "$path_apt_sources_debian"
 
   # create dpkg pre/post install hooks for persistence
   echo "Creating dpkg hooks in /etc/apt/apt.conf.d ..."
@@ -115,7 +115,7 @@ _install() {
 
 assert_root() { [ "$(id -u)" -eq '0' ] || { echo "This action requires root." && exit 1; }; }
 _usage() { echo "Usage: $(basename "$0") (--install|--uninstall)"; }
-emit_proxmox_source() {
+emit_proxmox_sources() {
     cat <<EOFPROXMOX
 Types: deb
 URIs: http://download.proxmox.com/debian/pve
@@ -126,7 +126,7 @@ Signed-By: /usr/share/keyrings/proxmox-archive-keyring.gpg
 EOFPROXMOX
 }
 
-emit_ceph_source() {
+emit_ceph_sources() {
     cat <<EOFCEPH
 Types: deb
 URIs: http://download.proxmox.com/debian/ceph-squid
@@ -137,7 +137,7 @@ Signed-By: /usr/share/keyrings/proxmox-archive-keyring.gpg
 EOFCEPH
 }
 
-emit_debian_source() {
+emit_debian_sources() {
     cat <<EOFDEBIAN
 Types: deb
 URIs: https://deb.debian.org/debian
