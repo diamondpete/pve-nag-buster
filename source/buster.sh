@@ -36,12 +36,15 @@ fi
 ENTERPRISE_BASE="/etc/apt/sources.list.d/pve-enterprise"
 CEPH_BASE="/etc/apt/sources.list.d/ceph"
 
-if [ -f "$ENTERPRISE_BASE.list" ]; then
-  echo "$SCRIPT: Disabling PVE enterprise repo list ..."
-  mv -f "$ENTERPRISE_BASE.list" "$ENTERPRISE_BASE.disabled"
+CEPH_URI="http:\/\/download.proxmox.com\/debian\/ceph-squid"
+
+if [ -f "$ENTERPRISE_BASE.sources" ]; then
+  echo "$SCRIPT: Disabling PVE enterprise repo sources..."
+  echo "Enabled: false" >> $ENTERPRISE_BASE.sources
 fi
 
-if [ -f "$CEPH_BASE.list" ]; then
-  echo "$SCRIPT: Disabling Ceph repo list ..."
-  mv -f "$CEPH_BASE.list" "$CEPH_BASE.disabled"
+if [ -f "$CEPH_BASE.sources" ]; then
+  echo "$SCRIPT: Disabling Ceph enterprise repo sources..."
+  sed -i "s/URIs:.*$/URIs: "$CEPH_URI"/" $CEPH_BASE.sources
+  sed -i "s/Components:.*$/Components: no-subscription/" $CEPH_BASE.sources
 fi
