@@ -68,8 +68,9 @@ strip_sq() {
 
 create_file "$dst"
 emit_file "$dst" 'base.sh'
-emit_emitter "$dst" pve_list apt.list.pve EOFPVE
-emit_emitter "$dst" ceph_list apt.list.ceph EOFCEPH
+emit_emitter "$dst" proxmox_sources apt.sources.proxmox EOFPROXMOX
+emit_emitter "$dst" ceph_sources apt.sources.ceph EOFCEPH
+emit_emitter "$dst" debian_sources apt.sources.debian EOFDEBIAN
 emit_emitter "$dst" buster_conf apt.conf.buster "'EOFCONF'"
 emit_emitter "$dst" buster buster.sh "'EOFBUSTER'"
 emit_line "$dst" '_main "$@"'

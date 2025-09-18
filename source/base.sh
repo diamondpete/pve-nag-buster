@@ -28,8 +28,9 @@ PATH=/usr/sbin:/usr/bin:/sbin:/bin
 # initialize variables
 _init() {
   path_apt_conf="/etc/apt/apt.conf.d/86pve-nags"
-  path_apt_list_pve="/etc/apt/sources.list.d/pve-no-subscription.list"
-  path_apt_list_ceph="/etc/apt/sources.list.d/ceph-no-subscription.list"
+  path_apt_sources_proxmox="/etc/apt/sources.list.d/proxmox.sources"
+  path_apt_sources_ceph="/etc/apt/sources.list.d/ceph.sources"
+  path_apt_sources_debian="/etc/apt/sources.list.d/debian.sources"
   path_buster="/usr/share/pve-nag-buster.sh"
 }
 
@@ -67,8 +68,9 @@ _uninstall() {
     rm -f "$path_buster"
 
   echo "Script and dpkg hooks removed, please manually remove sources lists if desired:"
-  echo "\t$path_apt_list_pve"
-  echo "\t$path_apt_list_ceph"
+  echo "\t$path_apt_sources_proxmox"
+  echo "\t$path_apt_sources_ceph"
+  echo "\t$path_apt_sources_debian"
 }
 
 _install() {
@@ -83,13 +85,17 @@ _install() {
     RELEASE=$(awk -F"[)(]+" '/VERSION=/ {print $2}' /etc/os-release)
   fi
 
-  # create the pve-no-subscription list
-  echo "Creating PVE no-subscription repo list ..."
-  emit_pve_list > "$path_apt_list_pve"
+  # create the pve-no-subscription source
+  echo "Creating Proxmox pve-no-subscription repo source ..."
+  emit_proxmox_sources > "$path_apt_sources_proxmox"
 
-  # create the ceph-no-subscription list
-  echo "Creating Ceph no-subscription repo list ..."
-  emit_ceph_list > "$path_apt_list_ceph"
+  # create the ceph no-subscription source
+  echo "Creating Ceph no-subscription repo source ..."
+  emit_ceph_sources > "$path_apt_sources_ceph"
+
+  # create the debian source
+  echo "Creating Debian repo source ..."
+  emit_debian_sources > "$path_apt_sources_debian"
 
   # create dpkg pre/post install hooks for persistence
   echo "Creating dpkg hooks in /etc/apt/apt.conf.d ..."
@@ -109,4 +115,3 @@ _install() {
 
 assert_root() { [ "$(id -u)" -eq '0' ] || { echo "This action requires root." && exit 1; }; }
 _usage() { echo "Usage: $(basename "$0") (--install|--uninstall)"; }
-

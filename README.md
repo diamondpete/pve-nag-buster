@@ -1,4 +1,4 @@
-## pve-nag-buster 
+## pve-nag-buster
 https://github.com/foundObjects/pve-nag-buster
 
 `pve-nag-buster` is a dpkg hook script that persistently removes license nags
@@ -70,4 +70,3 @@ encoded copy to stdout and quits. To install using the stored copy just run
 [Open an issue](https://github.com/foundObjects/pve-nag-buster/issues) on GitHub
 
 Please get in touch if you find a way to improve anything, otherwise enjoy!
-
