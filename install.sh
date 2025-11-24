@@ -2,10 +2,10 @@
 # shellcheck disable=SC2064
 set -eu
 
-# pve-nag-buster (v04) https://github.com/foundObjects/pve-nag-buster
+# pve-nag-buster https://github.com/diamondpete/pve-nag-buster
 # Copyright (C) 2019 /u/seaQueue (reddit.com/u/seaQueue)
 #
-# Removes Proxmox VE 6.x+ license nags automatically after updates
+# Removes Proxmox VE 9.x+ license nags automatically after updates
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -171,10 +171,10 @@ emit_buster() {
     cat <<'EOFBUSTER'
 #!/bin/sh
 #
-# pve-nag-buster.sh (v04) https://github.com/foundObjects/pve-nag-buster
+# pve-nag-buster.sh https://github.com/diamondpete/pve-nag-buster
 # Copyright (C) 2019 /u/seaQueue (reddit.com/u/seaQueue)
 #
-# Removes Proxmox VE 6.x+ license nags automatically after updates
+# Removes Proxmox VE 9.x+ license nags automatically after updates
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
