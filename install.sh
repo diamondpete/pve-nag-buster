@@ -205,7 +205,7 @@ inblock && /return;/ {
 }
 inblock && /Ext\.Msg\.show/ {
     if (!hasreturn) {
-        print "    return;";
+        print "                        return;";
         hasreturn = 1
     }
     inblock = 0
