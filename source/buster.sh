@@ -59,7 +59,9 @@ if [ "$ENTERPRISE_LAST_LINE" != "Enabled: false" ]; then
   echo "Enabled: false" >> $ENTERPRISE_BASE.sources
 fi
 
-if [ -f "$CEPH_BASE.sources" ]; then
+CEPH_SUBSCRIPTION_LINE=$(grep "Components:" $CEPH_BASE.sources)
+
+if [ "$CEPH_SUBSCRIPTION_LINE" != "Components: no-subscription" ]; then
   echo "$SCRIPT: Disabling Ceph enterprise repo sources..."
   sed -i "s/URIs:.*$/URIs: "$CEPH_URI"/" $CEPH_BASE.sources
   sed -i "s/Components:.*$/Components: no-subscription/" $CEPH_BASE.sources
